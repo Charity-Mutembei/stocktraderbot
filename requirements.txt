@@ -1,4 +1,4 @@
-lumibot=2.0.13
+lumibot
 fastapi
 alpaca-trade-api
 torch
