@@ -1,0 +1,5 @@
+lumibot=2.0.13
+fastapi
+alpaca-trade-api
+torch
+transformers 
