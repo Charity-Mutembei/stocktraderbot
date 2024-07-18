@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
 from alpaca_trade_api import REST
-from utils import estimate_sentiment
+from utils import estimation_sentiment
 
 
 #get the APIKEYS
@@ -56,9 +56,9 @@ class MLTrader(Strategy):
     def get_news_sentiment(self):
        today, three_days_ago = self.get_dates()
        news=self.api.get_news(symbol="SPY", start=three_days_ago, end=today)
-       news = [ev.__dict__["_raw"]["headline"] for ev in news]
+       news_headlines = [ev.__dict__["_raw"]["headline"] for ev in news]
 
-       probability, sentiment = estimate_sentiment(news)
+       probability, sentiment = estimation_sentiment(news_headlines)
 
        return probability, sentiment
 
@@ -112,8 +112,8 @@ strategy=MLTrader(
 
 # set up the backtesting here for our strategy
 #step 1: get the start_date
-backtesting_start_date=datetime(2023, 1, 1)
-backtesting_end_date=datetime.today()
+backtesting_start_date=datetime(2023, 12, 15)
+backtesting_end_date=datetime(2023, 12, 31)
 """
 step 3: set up the backtesting with the data source
 the data source here is YahooBackTesting class but if

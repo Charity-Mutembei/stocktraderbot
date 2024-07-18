@@ -1,7 +1,18 @@
+#!/usr/bin/python3
+"""
+This is supposed to be the estimate_sentiment function.
+Args:
+Takes in the news, runs it through the huggingface model,
+Return:
+The probaility and the sentiments
+"""
+
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from dotenv import load_dotenv
 from typing import Tuple 
+
+
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 load_dotenv()
@@ -10,9 +21,14 @@ tokenizer = AutoTokenizer.from_pretrained("ProsusAI/finbert")
 model = AutoModelForSequenceClassification.from_pretrained("ProsusAI/finbert").to(device)
 labels = ["positive", "negative", "neutral"]
 
-def estimate_sentiment(news):
-    if news:
-        tokens = tokenizer(news, return_tensors="pt", padding=True).to(device)
+def estimation_sentiment(news_headlines):
+    """
+    function = estimation_sentiment()
+    Args: news
+    Return: Probability, sentiment
+    """
+    if news_headlines:
+        tokens = tokenizer(news_headlines, return_tensors="pt", padding=True).to(device)
 
         result = model(tokens["input_ids"], attention_mask=tokens["attention_mask"])[
             "logits"
@@ -26,6 +42,6 @@ def estimate_sentiment(news):
 
 
 if __name__ == "__main__":
-    tensor, sentiment = estimate_sentiment(['markets responded negatively to the news!','traders were displeased!'])
+    tensor, sentiment = estimation_sentiment(['markets responded negatively to the news!','traders were displeased!'])
     print(tensor, sentiment)
     print(torch.cuda.is_available())
