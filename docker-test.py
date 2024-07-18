@@ -1,3 +1,9 @@
+#!/usr/bin/python3
+"""
+This file contains functions taking in strategy and API endpoints
+to paper trade as we set and backtest strategies
+"""
+
 from lumibot.brokers import Alpaca
 from lumibot.backtesting import YahooDataBacktesting
 from lumibot.strategies import Strategy
