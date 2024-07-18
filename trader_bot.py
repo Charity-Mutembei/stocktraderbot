@@ -22,7 +22,7 @@ AlpacaConfig = {
 broker=Alpaca(AlpacaConfig)
 
 #set up our own strategy. Lumibot have Momentum if you wanna borrow theirs
-class MLTrader(Strategy):
+class Trader(Strategy):
     def initialize(self, symbol="SPY"):
         self.symbol=symbol
         #the we determine how often we wanna make a trader by sleeptime
@@ -42,7 +42,7 @@ class MLTrader(Strategy):
             self.last_trade="buy"
 
 #lets set up the trading instance with our strategy variable
-strategy=MLTrader(
+strategy=Trader(
     name="mlstrat",
     broker=broker,
     parameters={
