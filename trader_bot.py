@@ -6,7 +6,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 import os
 
-#get the APIKEYS
+#get the APIKEYSs
 load_dotenv()
 
 API_KEY=os.getenv("Key")
